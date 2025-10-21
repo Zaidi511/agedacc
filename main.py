@@ -71,11 +71,11 @@ links = [
     "https://t.me/ofmelites",
     "https://t.me/HauteClubOFM",
     "https://t.me/marketOFM",
- "https://t.me/onlyfansdropsfreepaid",
+    "https://t.me/onlyfansdropsfreepaid",
     "https://t.me/texted/24",
     "https://t.me/SocialCove/3",
     "https://t.me/blackmarket/227701",
-"https://t.me/GooMarketplace/14577",
+    "https://t.me/GooMarketplace/14577",
     "https://t.me/DicesMarket/15",
     "https://t.me/OFMGroundFloor",
     "https://t.me/OFMJobs",
@@ -149,29 +149,29 @@ async def forward_messages():
                     success_count += 1
 
                 except FloodWaitError as e:
-                    print(f"Ã¢ÂÂ³ Flood wait {e.seconds}s")
+                    print(f"â³ Flood wait {e.seconds}s")
                     await asyncio.sleep(e.seconds)
                     error_count += 1
                 except Exception as e:
-                    print(f"Ã¢ÂÂ Error: {e}")
+                    print(f"â Error: {e}")
                     error_count += 1
 
             print(f"â Sent: {success_count} | â Errors: {error_count}")
             await asyncio.sleep(INTERVAL)
 
         except Exception as e:
-            print(f"Ã°ÂÂÂ¥ Loop crashed: {e}")
+            print(f"ð¥ Loop crashed: {e}")
             await asyncio.sleep(INTERVAL)
 
 # --------------- BOT COMMANDS -------------
 
 @dp.message(Command("start"))
 async def cmd_start(msg: types.Message):
-    await msg.reply("Ã°ÂÂ¤Â Bot is online!", parse_mode=ParseMode.HTML)
+    await msg.reply("ð¤ Bot is online!", parse_mode=ParseMode.HTML)
 
 @dp.message(Command("forcenow"))
 async def cmd_forcenow(msg: types.Message):
-    await msg.reply("Ã°ÂÂÂ Forcing forwardÃ¢ÂÂ¦", parse_mode=ParseMode.HTML)
+    await msg.reply("ð Forcing forwardâ¦", parse_mode=ParseMode.HTML)
     global last_message
     if last_message is None:
         msgs = await tel_client.get_messages('me', limit=1)
@@ -184,43 +184,43 @@ async def cmd_addgroup(msg: types.Message):
     global links
     parts = msg.text.split(maxsplit=1)
     if len(parts) != 2:
-        return await msg.reply("Ã¢ÂÂ Usage: /addgroup <t.me link>")
+        return await msg.reply("â Usage: /addgroup <t.me link>")
     link = parts[1].strip()
     if link not in links:
         links.append(link)
-        await msg.reply(f"Ã¢ÂÂ Added: {link}")
+        await msg.reply(f"â Added: {link}")
     else:
-        await msg.reply("Ã¢ÂÂ Ã¯Â¸Â Already in list.")
+        await msg.reply("â ï¸ Already in list.")
 
 @dp.message(Command("removegroup"))
 async def cmd_removegroup(msg: types.Message):
     global links
     parts = msg.text.split(maxsplit=1)
     if len(parts) != 2:
-        return await msg.reply("Ã¢ÂÂ Usage: /removegroup <t.me link>")
+        return await msg.reply("â Usage: /removegroup <t.me link>")
     link = parts[1].strip()
     if link in links:
         links.remove(link)
-        await msg.reply(f"Ã°ÂÂÂÃ¯Â¸Â Removed: {link}")
+        await msg.reply(f"ðï¸ Removed: {link}")
     else:
-        await msg.reply("Ã¢ÂÂ Ã¯Â¸Â Not found in list.")
+        await msg.reply("â ï¸ Not found in list.")
 
 @dp.message(Command("showgroups"))
 async def cmd_showgroups(msg: types.Message):
     if links:
-        await msg.reply("Ã°ÂÂÂ Groups/topics:\n<code>" + "\n".join(links) + "</code>", parse_mode=ParseMode.HTML)
+        await msg.reply("ð Groups/topics:\n<code>" + "\n".join(links) + "</code>", parse_mode=ParseMode.HTML)
     else:
-        await msg.reply("Ã°ÂÂÂ­ No groups/topics available.")
+        await msg.reply("ð­ No groups/topics available.")
 
 @dp.message(Command("reset"))
 async def cmd_reset(msg: types.Message):
     """
-    /reset <email_or_username> Ã¢ÂÂ uses InstagramÃ¢ÂÂs API to send a reset link.
+    /reset <email_or_username> â uses Instagramâs API to send a reset link.
     Reply format improved: shows timestamp, user, and simple success/failure.
     """
     parts = msg.text.split(maxsplit=1)
     if len(parts) != 2:
-        return await msg.reply("Ã¢ÂÂ Usage: /reset <email or username>")
+        return await msg.reply("â Usage: /reset <email or username>")
 
     user_input = parts[1].strip()
     now = datetime.now().strftime("%Y-%m-%d %I:%M %p")
@@ -264,7 +264,7 @@ async def cmd_reset(msg: types.Message):
     success, result = send_reset(user_input)
     if success:
         await msg.reply(
-            f"Ã¢ÂÂ Reset sent!\nÃ°ÂÂÂ Time: {now}\nÃ°ÂÂÂ¤ User: @xitaf3\nÃ°ÂÂÂ¬ Status: success",
+            f"â Reset sent!\nð Time: {now}\nð¤ User: @xitaf3\nð¬ Status: success",
             parse_mode=ParseMode.HTML
         )
     else:
@@ -275,7 +275,7 @@ async def cmd_reset(msg: types.Message):
             error_msg = result[:200]
 
         await msg.reply(
-            f"Ã¢ÂÂ Reset failed\nÃ¢ÂÂ  Message: {error_msg}",
+            f"â Reset failed\nâ  Message: {error_msg}",
             parse_mode=ParseMode.HTML
         )
 
